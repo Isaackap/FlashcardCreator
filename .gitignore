@@ -1,0 +1,6 @@
+.venv
+.cropped_images/
+.raw_csv_files/
+.cleaned_csv_files/
+
+*.png
