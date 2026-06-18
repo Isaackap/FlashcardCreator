@@ -12,4 +12,5 @@ dependencies = [
     "playwright>=1.60.0",
     "pytesseract>=0.3.13",
     "streamlit>=1.58.0",
+    "streamlit-cropper>=0.3.1",
 ]
