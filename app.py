@@ -1,12 +1,15 @@
 import streamlit as st
 import pandas as pd
-from ocr import process_image
+from ocr import process_crops
 from pathlib import Path
+from streamlit_cropper import st_cropper
+from PIL import Image
 
 
 RAW_CSV_PATH = Path("./raw_csv_files/")
 CLEANED_CSV_PATH = Path("./cleaned_csv_files/")
 UPLOAD_PATH = Path("./uploaded_images/")
+CROPPED_PATH = Path("./cropped_images/")
 
 required_files = [
     RAW_CSV_PATH / "japanese_raw.csv",
@@ -18,22 +21,62 @@ required_files = [
 def image_processor():
     st.title("Image Uploader")
 
-    uploaded_file = st.file_uploader("Choose an image...", type=["png", "jpg", "jpeg"])
+    uploaded_file = st.file_uploader(
+        "Choose an image...",
+        type=["png", "jpg", "jpeg"]
+    )
 
-    if uploaded_file is not None:
-        UPLOAD_PATH.mkdir(exist_ok=True)
+    if uploaded_file is None:
+        return
+    
+    UPLOAD_PATH.mkdir(exist_ok=True)
+    CROPPED_PATH.mkdir(exist_ok=True)
 
-        file_path = UPLOAD_PATH / uploaded_file.name
-        with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
+    img = Image.open(uploaded_file)
 
-        st.image(uploaded_file, caption="Uploaded Image", width="stretch")
+    uploaded_image_path = UPLOAD_PATH / uploaded_file.name
+    img.save(uploaded_image_path)
 
-        if st.button("Process Image"):
-            process_image(str(file_path))
-            st.session_state.image_processed = True
-            st.success("Image processed successfully!")
-            st.rerun()
+    st.image(img, caption="Uploaded Image", width="stretch")
+
+    st.subheader("Select Japanese column")
+    japanese_crop = st_cropper(
+        img,
+        realtime_update=True,
+        box_color="#0000FF",
+        key="japanese_crop"
+    )
+
+    st.subheader("Select Romaji column")
+    romaji_crop = st_cropper(
+        img,
+        realtime_update=True,
+        box_color="#00FF00",
+        key="romaji_crop"
+    )
+
+    st.subheader("Select English column")
+    english_crop = st_cropper(
+        img,
+        realtime_update=True,
+        box_color="#FF0000",
+        key="english_crop"
+    )
+
+    if st.button("Process Image"):
+        japanese_crop.save(CROPPED_PATH / "japanese_crop.png")
+        romaji_crop.save(CROPPED_PATH / "romaji_crop.png")
+        english_crop.save(CROPPED_PATH / "english_crop.png")
+
+        process_crops(
+            japanese_crop,
+            romaji_crop,
+            english_crop
+        )
+
+        st.session_state.image_processed = True
+        st.success("Image processed successfully!")
+        st.rerun()
 
 
 def dashboard():
