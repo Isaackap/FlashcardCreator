@@ -26,8 +26,8 @@ RUN uv sync --frozen || uv sync
 COPY . .
 
 # Create app folders if they don't exist
-RUN mkdir -p raw_csv_files cleaned_csv_files uploaded_images cropped_images
+RUN mkdir -p /app/projects
 
 EXPOSE 8501
 
-CMD ["uv", "run", "streamlit", "run", "app.py", "--server.address=0.0.0.0"]
+CMD ["uv", "run", "streamlit", "run", "src/flashcard_creator/app.py", "--server.address=0.0.0.0"]

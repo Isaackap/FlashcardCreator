@@ -14,10 +14,6 @@ services:
     ports:
       - 8501:8501
     volumes:
-      - ./raw_csv_files:/app/raw_csv_files
-      - ./cleaned_csv_files:/app/cleaned_csv_files
-      - ./uploaded_images:/app/uploaded_images
-      - ./cropped_images:/app/cropped_images
       - ./projects:/app/projects
 
 # The commented out section below is an example of how to define a PostgreSQL
