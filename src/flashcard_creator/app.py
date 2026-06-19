@@ -1,8 +1,8 @@
 import streamlit as st
-from flashcard_creator.project_manager import project_sidebar
-from flashcard_creator.image_processor import image_processor
-from flashcard_creator.flashcard_editor import flashcard_editor
-from flashcard_creator.file_browser import project_file_browser
+from project_manager import project_sidebar
+from image_processor import image_processor
+from flashcard_editor import flashcard_editor
+from file_browser import project_file_browser
 
 
 def dashboard():

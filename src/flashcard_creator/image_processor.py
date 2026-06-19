@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_cropper import st_cropper
 from PIL import Image
-from flashcard_creator.ocr import process_crops
+from ocr import process_crops
 
 
 def image_processor(paths):

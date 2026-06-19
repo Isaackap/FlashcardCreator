@@ -1,7 +1,7 @@
 import streamlit as st
 from pathlib import Path
 from streamlit_file_browser import st_file_browser
-from flashcard_creator.project_manager import PROJECTS_PATH
+from project_manager import PROJECTS_PATH
 
 
 def project_file_browser():
