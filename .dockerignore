@@ -31,13 +31,14 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 LICENSE
-README.md
+README*
 
-.git
 raw_csv_files/*
 cleaned_csv_files/*
 uploaded_images/*
 cropped_images/*
-*.png
-*.jpg
-*.csv
+projects/*
+
+.streamlit/secrets.toml
+*.log
+*.tmp
