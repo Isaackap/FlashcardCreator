@@ -1,7 +1,6 @@
 import pytesseract
 import pandas as pd
-import cv2, os
-from pathlib import Path
+import os
 
 if os.name == "nt":
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
