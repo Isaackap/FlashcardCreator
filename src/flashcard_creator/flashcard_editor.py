@@ -21,6 +21,12 @@ def flashcard_editor(paths):
         "English": english_df["English"]
     })
 
+
+    uploaded_images = list(paths["uploaded"].glob("*.png")) + list(paths["uploaded"].glob("*.jpg")) + list(paths["uploaded"].glob("*.jpeg"))
+    if uploaded_images:
+        st.subheader("Original Image. Verify the OCR results and edit as needed.")
+        st.image(uploaded_images[0], width="stretch")
+
     st.subheader("Flashcards")
 
     edited_df = st.data_editor(
@@ -40,4 +46,5 @@ def flashcard_editor(paths):
 
     if st.button("Process another image"):
         st.session_state.image_processed = False
+        st.session_state.file_browser = False
         st.rerun()
