@@ -8,7 +8,9 @@ cropped_images/*
 raw_csv_files/*
 cleaned_csv_files/*
 uploaded_images/*
+anki_exports/*
 projects/*
 
 *.png
 *.csv
+*.apkg
